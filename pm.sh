@@ -27,8 +27,9 @@ start() {
   app="$1"
   shift
   nohup "$app" "$@" > app.log 2> error.log &
-  echo $! > "$base/.pid"
-  echo "Process started with ID $!"
+  new_pid=$!
+  echo $new_pid > "$base/.pid"
+  echo "Process started with ID $new_pid"
 }
 
 stop() {
@@ -51,7 +52,6 @@ stop() {
   echo "Process with ID $pid has been stopped."
 }
 
-is_running 1233515
 case "$1" in
   start)
     start "$@"
