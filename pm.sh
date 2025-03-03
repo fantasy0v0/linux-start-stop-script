@@ -24,6 +24,11 @@ start() {
     exit 1
   fi
   shift
+  # 检查是否提供了后续参数
+  if [ "$#" -eq 0 ]; then
+    echo "Error: Missing args. Usage: $0 start app [...] to start."
+    exit 1
+  fi
   app="$1"
   shift
   nohup "$app" "$@" > app.log 2> error.log &
